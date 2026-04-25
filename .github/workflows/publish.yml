@@ -41,8 +41,8 @@ jobs:
     if: github.event.inputs.tag != ''
 
     environment:
-      name: pypi
-      url: https://pypi.org/p/vapoursynth-nlm-cuda
+      name: testpypi
+      url: https://test.pypi.org/p/vapoursynth-nlm-cuda
 
     permissions:
       id-token: write
@@ -81,3 +81,5 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
