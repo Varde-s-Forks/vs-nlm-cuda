@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         submodules: true
 
@@ -34,7 +34,7 @@ jobs:
 
     - name: Cache CUDA
       id: cache-cuda
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA
         key: ${{ runner.os }}-cuda-12.9.1
@@ -74,7 +74,7 @@ jobs:
         copy install\bin\*.dll artifact
 
     - name: Upload
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: vs-nlm-cuda-windows
         path: artifact
@@ -89,7 +89,7 @@ jobs:
         7z a -t7z -mx=9 ../vs-nlm-cuda-windows-${{ github.event.inputs.tag }}.7z vs-nlm-cuda-windows-${{ github.event.inputs.tag }}
 
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v3
       if: github.event_name == 'workflow_dispatch' && github.event.inputs.tag != ''
       with:
         tag_name: ${{ github.event.inputs.tag }}
